@@ -1,0 +1,50 @@
+################ A. THE FOUR STAGES (task08_billing.c)
+$ gcc -std=c11 -E task08_billing.c -o stages/task08_billing.i      # 1. preprocess
+$ gcc -std=c11 -S task08_billing.c -o stages/task08_billing.s      # 2. compile to assembly
+$ gcc -std=c11 -c task08_billing.c -o stages/task08_billing.o      # 3. assemble to object file
+$ gcc -std=c11 stages/task08_billing.o -o stages/task08_billing.out # 4. link to executable
+
+--- size of every stage's output
+   31 task08_billing.c
+  565 stages/task08_billing.i
+  165 stages/task08_billing.s
+  761 total
+2144 stages/task08_billing.o
+16056 stages/task08_billing.out
+
+--- what the preprocessor replaced or removed (source line  ->  line in the .i file)
+4:#define FIXED_CHARGE_PAISE 5000L          /* Rs 50 fixed charge */
+9:#define SQUARE_PAISE(x)    ((x) * 100L)   /* macro: replaced by the preprocessor */
+13:    long paise = FIXED_CHARGE_PAISE;
+28:               tests[i], p / 100, p % 100, SQUARE_PAISE(p / 100));
+  becomes:
+547:    long paise = 5000L;
+562:               tests[i], p / 100, p % 100, ((p / 100) * 100L));
+  comments in source: 4   comments in .i file: 0
+  #include <stdio.h> pulled in 349 non-empty lines in total (source had 28)
+
+--- start of the assembly (.s) for compute_bill
+5:compute_bill:
+6-.LFB0:
+7-	.cfi_startproc
+8-	endbr64
+9-	pushq	%rbp
+10-	.cfi_def_cfa_offset 16
+11-	.cfi_offset 6, -16
+12-	movq	%rsp, %rbp
+13-	.cfi_def_cfa_register 6
+14-	movl	%edi, -20(%rbp)
+15-	movq	$5000, -8(%rbp)
+16-	cmpl	$200, -20(%rbp)
+17-	jle	.L2
+
+--- symbols in the object file (U = undefined, resolved by the linker from libc)
+                 U __stack_chk_fail
+0000000000000000 T compute_bill
+0000000000000060 T main
+                 U printf
+
+--- run the executable
+  0 units -> Rs 50.00   (rupees to paise macro: 5000)
+150 units -> Rs 162.50   (rupees to paise macro: 16200)
+350 units -> Rs 950.00   (rupees to paise macro: 95000)

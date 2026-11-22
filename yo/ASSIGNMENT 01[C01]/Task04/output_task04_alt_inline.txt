@@ -1,0 +1,6 @@
+$ gcc -std=c11 -Wall -Wextra  -o task04_alt_inline.out task04_alt_inline.c -lm
+$ ./task04_alt_inline.out
+  square_long(a+1) = 25
+  10 * max_int(2, 3) = 30
+  max_int(i++, j) with i=5, j=3 -> result 5, i is now 6 (i++ evaluated once)
+  rupees_to_paise(2+3) = 500 paise

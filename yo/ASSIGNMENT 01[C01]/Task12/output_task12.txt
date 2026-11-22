@@ -1,0 +1,41 @@
+File readings_house_A.txt
+  readings               : 2880 (30.0 days)
+  total energy           : 552000 Wh = 552.000 kWh
+  peak (18:00-22:00) energy: 192000 Wh
+  fixed charge               Rs 50.00
+  energy charge (no peak rule) Rs 1809.00
+  peak surcharge             Rs 125.84
+  TOTAL BILL                 Rs 1984.84
+
+File readings_house_B.txt
+  readings               : 2880 (30.0 days)
+  total energy           : 144000 Wh = 144.000 kWh
+  peak (18:00-22:00) energy: 0 Wh
+  fixed charge               Rs 50.00
+  energy charge (no peak rule) Rs 99.00
+  peak surcharge             Rs 0.00
+  TOTAL BILL                 Rs 149.00
+
+File readings_house_C.txt
+  readings               : 2880 (30.0 days)
+  total energy           : 1200000 Wh = 1200.000 kWh
+  peak (18:00-22:00) energy: 1200000 Wh
+  fixed charge               Rs 50.00
+  energy charge (no peak rule) Rs 4725.00
+  peak surcharge             Rs 945.00
+  TOTAL BILL                 Rs 5720.00
+
+--- revised tariff (no recompile)
+File readings_house_A.txt
+  readings               : 2880 (30.0 days)
+  total energy           : 552000 Wh = 552.000 kWh
+  peak (17:00-23:00) energy: 228000 Wh
+  fixed charge               Rs 50.00
+  energy charge (no peak rule) Rs 1809.00
+  peak surcharge             Rs 186.80
+  TOTAL BILL                 Rs 2045.80
+
+--- invalid files
+READINGS ERROR: line 100: not a whole number of Wh
+READINGS ERROR: line 51: 6000 Wh in 15 minutes exceeds the 5000 Wh limit
+READINGS ERROR: more than 2976 readings: a bill covers at most 31 days

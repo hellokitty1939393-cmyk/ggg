@@ -1,0 +1,24 @@
+$ gcc -std=c11 -Wall -Wextra -o task11_config_tariff.out task11_config_tariff.c
+
+$ ./task11_config_tariff.out tariff.cfg
+tariff loaded from tariff.cfg: fixed 5000, slabs 100/200, rates 0/225/450 paise
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 162.50
+200 units -> Rs 275.00
+350 units -> Rs 950.00
+start-up cost: 2.26 microseconds to read and validate the file (average of 20000 reads)
+space for the six tariff values: 48 bytes (a #define occupies none)
+
+$ ./task11_config_tariff.out tariff_revised.cfg      # NO recompile: only the text file differs
+tariff loaded from tariff_revised.cfg: fixed 5000, slabs 100/200, rates 0/230/450 paise
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 165.00
+200 units -> Rs 280.00
+350 units -> Rs 955.00
+start-up cost: 2.31 microseconds to read and validate the file (average of 20000 reads)
+space for the six tariff values: 48 bytes (a #define occupies none)
+
+--- invalid configuration is refused, not silently used
+cannot use tariff_invalid.cfg (error -5)

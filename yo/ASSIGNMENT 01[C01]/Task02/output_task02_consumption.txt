@@ -1,0 +1,5 @@
+$ gcc -std=c11 -Wall -Wextra  -o task02_consumption.out task02_consumption.c -lm
+$ ./task02_consumption.out
+sizeof(meter_t) = 2 bytes, maximum reading = 65535
+Consumption: 330 units
+Consumption: 256 units

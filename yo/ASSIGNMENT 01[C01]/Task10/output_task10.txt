@@ -1,0 +1,30 @@
+$ gcc -std=c11 -Wall -Wextra  -o task10_expectation_vs_execution.out task10_expectation_vs_execution.c -lm
+$ ./task10_expectation_vs_execution.out
+A. totals of n bills: exact paise (long long) versus float and double rupees
+       n        exact paise         float rupees        double rupees    float error   double error
+    4000          162254900         1622549.0000       1622549.000000         0.0000     0.00000000
+   60000         2486234325        24862312.0000      24862343.250000       -31.2500     0.00000000
+  800000        33181111750       332100480.0000     331811117.500000    289362.5000     0.00000000
+   (errors are in rupees; the paise total is exact by construction)
+
+B. does the district total overflow? (800,000 bills, paise)
+  exact district total      = 33181111750 paise = Rs 331811117.50
+  int       (4 bytes, max 2147483647)          : OVERFLOWS
+            first overflow at bill number 51717
+  long      (8 bytes, max 9223372036854775807) : no overflow on this system
+  long long (8 bytes, max 9223372036854775807) : no overflow
+  NOTE: the C standard only guarantees long >= 32 bits. Where long is 32-bit (Windows) it
+        behaves like int above and overflows. A long long total is safe everywhere.
+
+C. this system versus the minimum guaranteed by the C standard
+type          bytes  bits here   standard min   verdict
+char              1          8         8 bits   equal to the minimum
+short             2         16        16 bits   equal to the minimum
+int               4         32        16 bits   larger than the minimum
+long              8         64        32 bits   larger than the minimum
+long long         8         64        64 bits   equal to the minimum
+float             4          -       6 digits   FLT_DIG = 6  (meets the minimum)
+double            8          -      10 digits   DBL_DIG = 15 (meets the minimum)
+  USHRT_MAX = 65535 (standard guarantees at least 65535: the 16-bit meter register fits)
+  INT_MAX = 2147483647 (standard guarantees at least 32767)
+  LONG_MAX = 9223372036854775807 (standard guarantees at least 2147483647)

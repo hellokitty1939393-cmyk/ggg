@@ -1,0 +1,13 @@
+$ gcc -std=c11 -Wall -Wextra -o alt_slab_array.out alt_slab_array.c billing.c
+$ ./alt_slab_array.out   (unoptimised build)
+units 0..5000 compared: 0 mismatches between loop version and if-version
+fixed if-statements : 3.214 ns per bill (sum 4142187500000)
+loop over 3 slabs   : 7.918 ns per bill (sum 4142187500000)
+extra space (two arrays): 36 bytes
+
+$ gcc -std=c11 -O2 -o alt_slab_array_O2.out alt_slab_array.c billing.c
+$ ./alt_slab_array_O2.out
+units 0..5000 compared: 0 mismatches between loop version and if-version
+fixed if-statements : 1.695 ns per bill (sum 4142187500000)
+loop over 3 slabs   : 3.229 ns per bill (sum 4142187500000)
+extra space (two arrays): 36 bytes

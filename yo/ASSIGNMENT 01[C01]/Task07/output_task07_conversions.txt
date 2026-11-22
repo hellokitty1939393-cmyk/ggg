@@ -1,0 +1,28 @@
+$ gcc -std=c11 -Wall -Wextra  -o task07_conversions.out task07_conversions.c -lm
+task07_conversions.c: In function 'main':
+task07_conversions.c:36:114: warning: comparison of integer expressions of different signedness: 'int' and 'unsigned int' [-Wsign-compare]
+   36 |     printf("   (-1 < 1u) = %d       (-1 is converted to unsigned 4294967295, so the test is false)\n", minus_one < one);
+      |                                                                                                                  ^
+$ ./task07_conversions.out
+1. integer division
+   150 / 100        = 1       (both operands int: fraction .5 is discarded)
+   150 / 100.0      = 1.50    (one operand double: the int is converted to double)
+   16250 paise / 100 = 162 rupees, remainder 50 paise (use / and % together)
+2. cast of a large long to int
+   (int)5000000000L = 705032704   (value does not fit in 32 bits; the high bits are lost)
+3. signed versus unsigned comparison
+   (-1 < 1u) = 0       (-1 is converted to unsigned 4294967295, so the test is false)
+4. integer promotion
+   reg + 1 = 65536, but reg after reg++ = 0   (the sum is computed as int, the increment is stored back as 16-bit)
+5. binary floating point
+   0.1 + 0.2 == 0.3 is FALSE; 0.1 + 0.2 = 0.30000000000000004
+6. converting rupees to paise
+   1.005 * 100 = 100.49999999999999 -> (long) = 100, llround = 100   (the decimal rule says 101)
+   integer rule: round_div(1005, 10) = 101
+7. cast placed after the multiplication instead of before
+   (long)(50000 * 450)   = 22500000   (fits in int, so no harm)
+   (long)(5000000 * 450) = -2044967296   (product overflowed in int before the cast)
+   (long)5000000 * 450   = 2250000000   (correct)
+
+Rounding rule: whole-paise result = (numerator + denominator/2) / denominator in integers
+   1235 Wh at 450 paise/kWh = 555750/1000 paise: truncated = 555, rounded half-up = 556

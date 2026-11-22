@@ -1,0 +1,10 @@
+$ gcc -std=c11 -Wall -Wextra  -o task01_alt_text_readings.out task01_alt_text_readings.c -lm
+$ ./task01_alt_text_readings.out
+pairs processed          : 2000000
+integer  total units     : 398536064  rollovers: 5932
+text     total units     : 398536064  rollovers: 5932
+results identical        : yes
+integer  time per pair   : 3.31 ns  (O(1))
+text     time per pair   : 31.68 ns  (O(d), d = 5 digits)
+slowdown of text         : 9.6x
+space per reading        : integer 2 bytes, text 6 bytes (d+1 incl. '\0')

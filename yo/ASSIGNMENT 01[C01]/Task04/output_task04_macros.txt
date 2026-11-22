@@ -1,0 +1,23 @@
+$ gcc -std=c11 -Wall -Wextra  -o task04_macros.out task04_macros.c -lm
+$ ./task04_macros.out
+Pitfall 1: missing parentheses around the argument
+  BAD_SQUARE(a+1) = 9   (expands to a+1*a+1 = 4+4+1)
+  SQUARE(a+1)     = 25   (expands to ((a+1)*(a+1)))
+Pitfall 2: missing parentheses around the whole expansion
+  10 * BAD_MAX(2, 3) = 2  (expected 30)
+  10 * MAX(2, 3)     = 30
+Pitfall 3: an argument with a side effect is evaluated twice
+  MAX(i++, j) with i=5, j=3 -> result 6, i is now 7 (i++ ran twice; expected 5 and 6)
+Useful macro: RUPEES_TO_PAISE
+  RUPEES_TO_PAISE(50)  = 5000 paise
+  RUPEES_TO_PAISE(2+3) = 500 paise  (argument parenthesised, so 500 and not 202)
+
+=== gcc -E : what the preprocessor really produced for main() ===
+$ gcc -std=c11 -E task04_macros.c -o task04_macros.i
+553:    printf("  BAD_SQUARE(a+1) = %d   (expands to a+1*a+1 = 4+4+1)\n", a + 1 * a + 1);
+554:    printf("  SQUARE(a+1)     = %d   (expands to ((a+1)*(a+1)))\n", ((a + 1) * (a + 1)));
+557:    printf("  10 * BAD_MAX(2, 3) = %d  (expected 30)\n", 10 * 2 > 3 ? 2 : 3);
+558:    printf("  10 * MAX(2, 3)     = %d\n", 10 * ((2) > (3) ? (2) : (3)));
+562:    int r = ((i++) > (j) ? (i++) : (j));
+566:    printf("  RUPEES_TO_PAISE(50)  = %ld paise\n", ((long)(50) * 100L));
+567:    printf("  RUPEES_TO_PAISE(2+3) = %ld paise  (argument parenthesised, so 500 and not 202)\n", ((long)(2 + 3) * 100L));

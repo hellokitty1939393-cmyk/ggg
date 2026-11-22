@@ -1,0 +1,21 @@
+################ C. WARNINGS (-Wall -Wextra) AND THEIR FIX
+$ gcc -std=c11 -Wall -Wextra -c warn_demo.c -o warn_demo.o
+warn_demo.c: In function 'compute':
+warn_demo.c:9:15: warning: comparison of integer expressions of different signedness: 'int' and 'unsigned int' [-Wsign-compare]
+    9 |     if (units > limit)
+      |               ^
+warn_demo.c:11:14: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+   11 |     printf("%d\n", paise);
+      |             ~^     ~~~~~
+      |              |     |
+      |              int   long int
+      |             %ld
+warn_demo.c:6:9: warning: unused variable 'never_used' [-Wunused-variable]
+    6 |     int never_used;
+      |         ^~~~~~~~~~
+warn_demo.c:4:29: warning: unused parameter 'unused_param' [-Wunused-parameter]
+    4 | long compute(int units, int unused_param)
+      |                         ~~~~^~~~~~~~~~~~
+
+$ gcc -std=c11 -Wall -Wextra -c warn_fixed.c -o warn_fixed.o
+no warnings

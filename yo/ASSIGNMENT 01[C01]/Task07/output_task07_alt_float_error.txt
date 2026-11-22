@@ -1,0 +1,14 @@
+$ gcc -std=c11 -Wall -Wextra  -o task07_alt_float_error.out task07_alt_float_error.c -lm
+$ ./task07_alt_float_error.out
+       n      exact paise      float paise  error (paise)        error/n
+    1000         41928350         41928352              2        0.00200
+    4000        169001300        169001296             -4       -0.00100
+   16000        665668250        665667968           -282       -0.01762
+   60000       2487682875       2487673088          -9787       -0.16312
+  240000       9988403250       9983227904       -5175346      -21.56394
+  800000      33211060825      33238413312       27352487       34.19061
+
+time per addition: float 2.493 ns, long 0.464 ns (both O(1))
+space per value  : float 4 bytes, long 8 bytes
+100,000,000 additions of 0.01f give 262144.00 (exact 1000000.00) -> float stops growing once the
+sum is large enough that 0.01 is below half of one float step.

@@ -1,0 +1,12 @@
+$ gcc -std=c11 -Wall -Wextra  -o task03_alt_const_enum.out task03_alt_const_enum.c -lm
+$ ./task03_alt_const_enum.out
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 162.50
+200 units -> Rs 275.00
+350 units -> Rs 950.00
+
+What is different from #define:
+  sizeof(RATE2_PAISE) as const long = 8 bytes   (a #define 225 is an int literal: 4 bytes)
+  const variable has an address     = yes (visible in debugger)
+  array sized by enum constant      = 3 elements

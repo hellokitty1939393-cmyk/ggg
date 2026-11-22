@@ -1,0 +1,54 @@
+$ gcc -std=c11 -Wall -Wextra -o billing_release.out main.c billing.c
+  0 units -> Rs 50.00
+150 units -> Rs 162.50
+350 units -> Rs 950.00
+
+$ gcc -std=c11 -Wall -Wextra -DDEBUG -o billing_debug.out main.c billing.c
+[DEBUG] units=0, start with fixed charge=5000 paise
+[DEBUG]   total = 5000 paise
+  0 units -> Rs 50.00
+[DEBUG] units=150, start with fixed charge=5000 paise
+[DEBUG]   slab 2: 50 units x 225 = 11250 paise
+[DEBUG]   total = 16250 paise
+150 units -> Rs 162.50
+[DEBUG] units=350, start with fixed charge=5000 paise
+[DEBUG]   slab 3: 150 units x 450 = 67500 paise
+[DEBUG]   slab 2: 100 units x 225 = 22500 paise
+[DEBUG]   total = 95000 paise
+350 units -> Rs 950.00
+
+$ gcc -std=c11 -Wall -Wextra -o alt_runtime_debug.out alt_runtime_debug.c
+$ ./alt_runtime_debug.out        (debug off)
+  0 units -> Rs 50.00
+150 units -> Rs 162.50
+350 units -> Rs 950.00
+$ ./alt_runtime_debug.out -d     (debug on)
+[DEBUG] units=0, start with fixed charge=5000 paise
+[DEBUG]   total = 5000 paise
+  0 units -> Rs 50.00
+[DEBUG] units=150, start with fixed charge=5000 paise
+[DEBUG]   slab 2: 50 units x 225 = 11250 paise
+[DEBUG]   total = 16250 paise
+150 units -> Rs 162.50
+[DEBUG] units=350, start with fixed charge=5000 paise
+[DEBUG]   slab 3: 150 units x 450 = 67500 paise
+[DEBUG]   slab 2: 100 units x 225 = 22500 paise
+[DEBUG]   total = 95000 paise
+350 units -> Rs 950.00
+
+=== include guard evidence: header included twice, compiles without redefinition errors ===
+OK: guard_test compiled and ran (exit status 0)
+
+=== space: size of the executables (text = machine code) ===
+   text	   data	    bss	    dec	    hex	filename
+   2451	    624	      8	   3083	    c0b	billing_release.out
+   2769	    624	      8	   3401	    d49	billing_debug.out
+   2863	    624	      8	   3495	    da7	alt_runtime_debug.out
+debug strings present in executable?
+  billing_release.out : 0 lines containing DEBUG
+  billing_debug.out   : 4 lines containing DEBUG
+  alt_runtime_debug   : 4 lines containing DEBUG
+
+=== time per bill (gcc -O2, 100,000,000 bills) ===
+bench: sum=4142187500000, 1.936 ns per bill
+bench: sum=4142187500000, 2.091 ns per bill

@@ -1,0 +1,12 @@
+--- the only difference between the two sources:
+6c6
+< #define RATE2_PAISE 225 /* Rs 2.25 per unit */
+---
+> #define RATE2_PAISE 230 /* Rs 2.30 per unit */
+$ gcc -std=c11 -Wall -Wextra  -o task03_constants_rate230.out task03_constants_rate230.c -lm
+$ ./task03_constants_rate230.out
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 165.00
+200 units -> Rs 280.00
+350 units -> Rs 955.00

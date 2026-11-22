@@ -1,0 +1,34 @@
+$ gcc -std=c11 -Wall -Wextra -o task06_wrong_specifier.out task06_wrong_specifier.c      (warnings expected)
+task06_wrong_specifier.c: In function 'main':
+task06_wrong_specifier.c:14:24: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+   14 |     printf("  %%d  -> %d   (WRONG: only the low 32 bits are used)\n", big);
+      |                       ~^                                              ~~~
+      |                        |                                              |
+      |                        int                                            long int
+      |                       %ld
+task06_wrong_specifier.c:22:22: warning: format '%f' expects argument of type 'float *', but argument 3 has type 'double *' [-Wformat=]
+   22 |     sscanf("3.14", "%f", &d);               /* %f stores a 4-byte float into an 8-byte double */
+      |                     ~^   ~~
+      |                      |   |
+      |                      |   double *
+      |                      float *
+      |                     %lf
+
+$ ./task06_wrong_specifier.out
+-- printing a long (5,000,000,000)
+  %ld -> 5000000000   (correct)
+  %d  -> 705032704   (WRONG: only the low 32 bits are used)
+-- printing an unsigned int (4,000,000,000)
+  %u  -> 4000000000   (correct)
+  %d  -> -294967296   (WRONG: read as signed)
+-- reading 3.14 into a double
+  sscanf with %f  -> d = 5.32861e-315   (WRONG: expected 3.14)
+  sscanf with %lf -> d = 3.14   (correct)
+-- return value of sscanf (number of fields converted)
+  "12 34"  -> returned 2
+  "12 abc" -> returned 1 (second field failed)
+  "abc 34" -> returned 0 (first field failed)
+  ""        -> returned -1 (EOF, no input at all)
+-- printing rupees and paise from an integer amount
+  16250 paise -> Rs 162.50
+  5005 paise -> Rs 50.05   (%02ld keeps the leading zero; %ld.%ld would print Rs 50.5)

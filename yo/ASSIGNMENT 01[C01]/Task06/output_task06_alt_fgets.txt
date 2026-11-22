@@ -1,0 +1,36 @@
+$ gcc -std=c11 -Wall -Wextra -o task06_alt_fgets.out task06_alt_fgets.c
+
+$ ./task06_alt_fgets.out < input_valid.txt
+Enter: household category(D/C) previous current   (end with Ctrl+D, or Ctrl+Z on Windows)
+Record 1: household 101 [D] previous=1200 current=1530 units=330 bill=Rs 860.00
+Record 2: household 102 [D] previous=65400 current=120 units=256 bill=Rs 527.00
+Record 3: household 103 [D] previous=500 current=500 units=0 bill=Rs 50.00
+Record 4: household 104 [D] previous=0 current=100 units=100 bill=Rs 50.00
+Record 5: household 105 [D] previous=3000 current=3150 units=150 bill=Rs 162.50
+Summary: 5 valid, 0 rejected, total Rs 1649.50
+
+$ ./task06_alt_fgets.out < input_invalid.txt
+Enter: household category(D/C) previous current   (end with Ctrl+D, or Ctrl+Z on Windows)
+Record 1: INVALID INPUT - skipped
+Record 2: NEGATIVE READING - skipped
+Record 3: IMPLAUSIBLE CONSUMPTION (65206 units) - skipped
+Record 4: READING ABOVE 65535 - skipped
+Record 5: INVALID CATEGORY 'X' - skipped
+Record 6: household 206 [D] previous=100 current=250 units=150 bill=Rs 162.50
+Record 7: INVALID INPUT - skipped
+Record 8: INVALID INPUT - skipped
+Record 9: INVALID INPUT - skipped
+Summary: 1 valid, 8 rejected, total Rs 162.50
+
+diff scanf-version vs fgets-version on input_valid.txt : identical output
+diff scanf-version vs fgets-version on input_invalid.txt : DIFFERENT
+8c8
+< Record 7: household 207 [D] previous=100 current=208 units=108 bill=Rs 68.00
+---
+> Record 7: INVALID INPUT - skipped
+10,11c10,11
+< Record 9: READING ABOVE 65535 - skipped
+< Summary: 2 valid, 7 rejected, total Rs 230.50
+---
+> Record 9: INVALID INPUT - skipped
+> Summary: 1 valid, 8 rejected, total Rs 162.50

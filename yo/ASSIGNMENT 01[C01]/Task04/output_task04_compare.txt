@@ -1,0 +1,17 @@
+=== time per use (400,000,000 uses) ===
+-O0
+macro            : sum=255900000000  2.267 ns per use
+inline function  : sum=255900000000  2.064 ns per use
+-O2
+macro            : sum=255900000000  0.415 ns per use
+inline function  : sum=255900000000  0.405 ns per use
+
+=== code size when the operation is used k = 1000 times (gcc -c, 'size' text section) ===
+--- -O0
+   text	   data	    bss	    dec	    hex	filename
+  29312	      0	      0	  29312	   7280	macro_k1000.o
+  33371	      0	      0	  33371	   825b	inline_k1000.o
+--- -O2
+   text	   data	    bss	    dec	    hex	filename
+   5968	      0	      0	   5968	   1750	macro_k1000.o
+   5968	      0	      0	   5968	   1750	inline_k1000.o

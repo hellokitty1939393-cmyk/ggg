@@ -1,0 +1,25 @@
+$ gcc -std=c11 -Wall -Wextra  -o task02_datatypes.out task02_datatypes.c -lm
+$ ./task02_datatypes.out
+TYPE                 BYTES  RANGE
+char                 1      -128 .. 127
+short                2      -32768 .. 32767
+unsigned short       2      0 .. 65535
+int                  4      -2147483648 .. 2147483647
+unsigned int         4      0 .. 4294967295
+long                 8      -9223372036854775808 .. 9223372036854775807
+long long            8      -9223372036854775808 .. 9223372036854775807
+unsigned long long   8      0 .. 18446744073709551615
+float                4      max 3.402823e+38, 6 digits, epsilon 1.192093e-07
+double               8      max 1.797693e+308, 15 digits, epsilon 2.220446e-16
+
+Worst-case bill = 2187500 paise; worst-case district total = 1750000000000 paise
+  fits in int       (max 2147483647)?  NO
+  fits in long      (max 9223372036854775807)? yes
+  fits in long long (max 9223372036854775807)? yes
+
+unsigned short 65535 + 1 -> 0  (wraps to 0, defined behaviour for unsigned types)
+
+4000 bills of Rs 123.45 each (exact total Rs 493800.00)
+  float  rupees total : 493781.2188
+  float  error        : -18.7812 rupees
+  paise  integer total: 49380000  -> Rs 493800.00  (exact)

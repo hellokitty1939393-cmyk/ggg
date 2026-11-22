@@ -1,0 +1,11 @@
+$ gcc -std=c11 -Wall -Wextra  -o task02_alt_double.out task02_alt_double.c -lm
+$ ./task02_alt_double.out
+Each bill = Rs 123.45 (12345 paise)
+       n  double total (rupees)  llround(x*100)   exact paise       
+    4000  493800.0000000320      49380000         49380000           error before rounding: 3.201e-08 rupees
+   60000  7407000.0000074534     740700000        740700000          error before rounding: 7.453e-06 rupees
+  800000  98760000.0014311969    9876000000       9876000000         error before rounding: 1.431e-03 rupees
+
+time per addition: double 2.556 ns, long long 0.874 ns (both O(1))
+space per value  : double 8 bytes, long long 8 bytes
+note: 100,000,000 additions of 0.01 in double give 1000000.000779 (exact 1000000.000000)

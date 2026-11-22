@@ -1,0 +1,29 @@
+$ gcc -std=c11 -Wall -Wextra  -o task01_data_items.out task01_data_items.c -lm
+$ ./task01_data_items.out
+DATA ITEM          ROLE      TYPE            JUSTIFICATION
+household number   input     unsigned long   800,000 houses > 65535, never negative
+category           input     char            one letter code: 'D' domestic, 'C' commercial
+previous reading   input     meter_t (u16)   meter register is 16-bit: 0..65535
+current reading    input     meter_t (u16)   same register; may be LOWER after roll-over
+units              output    unsigned int    (current-previous) mod 65536; never negative
+fixed charge       constant  long (paise)    Rs 50.00 = 5000 paise, integer so no rounding
+slab limits        constant  int (units)     100 and 200 units, whole units
+slab rates         constant  long (paise)    0, 225, 450 paise per unit (fractional rupees!)
+energy charge      output    long (paise)    up to 5000*450 = 2,250,000 > 32767
+total bill         output    long (paise)    fixed + energy; never negative
+district total     output    long long       800,000 bills * ~Rs 415 = 3.3e10 paise > INT_MAX
+
+Rule checks on every consumption 0..5000 units:
+  rule 1: bill never negative
+  rule 2: total == fixed + energy
+  rule 3: more units never gives a smaller bill
+  15003 checks run, 0 failed
+
+Sample bills (units -> fixed + energy = total):
+    0 units -> Rs 50.00 + Rs 0.00 = Rs 50.00
+  100 units -> Rs 50.00 + Rs 0.00 = Rs 50.00
+  150 units -> Rs 50.00 + Rs 112.50 = Rs 162.50
+  200 units -> Rs 50.00 + Rs 225.00 = Rs 275.00
+  350 units -> Rs 50.00 + Rs 900.00 = Rs 950.00
+
+sizeof(meter_t) = 2 bytes

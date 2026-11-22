@@ -1,0 +1,17 @@
+$ gcc -std=c11 -Wall -Wextra  -o task10_alt_double_total.out task10_alt_double_total.c -lm
+$ ./task10_alt_double_total.out
+800,000 bills
+  long long paise total        : 33181111750
+  double (whole paise) total   : 33181111750.0   difference 0.0 paise
+  double (rupees) total x 100  : 33181111750.0000   difference 0.000000 paise
+
+Where each type stops being exact (paise):
+  int       overflows above 2147483647            = Rs 21474836
+  long long overflows above 9223372036854775807 = Rs 9.2234e+16
+  double    exact for whole numbers up to 2^53 = 9007199254740992 = Rs 9.0072e+13
+  800,000 bills of the worst-case Rs 21,875 = Rs 1.750e+10: far below both limits
+  proof: 2^53 + 1 in double = 9007199254740992 (the +1 is lost: precision loss, no overflow)
+  proof: 2^53 + 2 in double = 9007199254740994
+
+time per addition: double 2.761 ns, long long 0.634 ns
+space per variable: double 8 bytes, long long 8 bytes

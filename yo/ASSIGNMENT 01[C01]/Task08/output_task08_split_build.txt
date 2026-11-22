@@ -1,0 +1,27 @@
+################ D. ALTERNATIVE: several .c files + shared header + Makefile
+$ make
+gcc -std=c11 -Wall -Wextra -c input.c -o input.o
+gcc -std=c11 -Wall -Wextra -c tariff.c -o tariff.o
+gcc -std=c11 -Wall -Wextra -c report.c -o report.o
+gcc -std=c11 -Wall -Wextra -o billing_split.out input.o tariff.o report.o
+$ ./billing_split.out
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 162.50
+200 units -> Rs 275.00
+350 units -> Rs 950.00
+
+--- space used by the object files and the executable
+   text	   data	    bss	    dec	    hex	filename
+    215	      0	      0	    215	     d7	input.o
+    184	      0	      0	    184	     b8	tariff.o
+    485	      0	      0	    485	    1e5	report.o
+   2179	    608	      8	   2795	    aeb	billing_split.out
+1576 input.o
+2128 report.o
+1312 tariff.o
+
+--- build time in microseconds (average of 20 builds, tiny programs)
+single file, any change (recompile everything + link) : 46055
+split files, full rebuild (3 compiles + link)         : 90495
+split files, ONE file changed (1 compile + link)      : 43524

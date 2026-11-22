@@ -1,0 +1,24 @@
+$ gcc -std=c11 -Wall -Wextra -o task11_final_demo.out task11_final_demo.c
+Tariff in force: fixed 5000, slab 2 rate 225 paise/unit
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 162.50
+200 units -> Rs 275.00
+350 units -> Rs 950.00
+roll-over 65400 -> 120 : 256 units
+district total (800,000 bills) = 33181111750 paise = Rs 331811117.50
+sizeof(paise_t) = 8 bytes, sizeof(meter_t) = 2 bytes
+
+=== TARIFF REVISION, compiled-in design: edit one line of final_design.h, recompile, redistribute ===
+--- the only change:
+20c20
+< #define RATE2_PAISE         ((paise_t)225)
+---
+> #define RATE2_PAISE         ((paise_t)230)
+Tariff in force: fixed 5000, slab 2 rate 230 paise/unit
+  0 units -> Rs 50.00
+100 units -> Rs 50.00
+150 units -> Rs 165.00
+200 units -> Rs 280.00
+350 units -> Rs 955.00
+recompile time: 44 ms (plus copying the new executable to every office computer)

@@ -1,0 +1,54 @@
+$ gcc -std=c11 -Wall -Wextra -o billing.out main.c billing.c
+$ gcc -std=c11 -Wall -Wextra -o test_billing.out test_billing.c billing.c
+
+$ ./test_billing.out
+CASE                               readings               EXPECTED       ACTUAL         RESULT
+slab 1 normal (50 units)           100 -> 150             50 u, Rs 50.00 50 u, Rs 50.00 PASS
+slab 2 normal (150 units)          3000 -> 3150           150 u, Rs 162.50 150 u, Rs 162.50 PASS
+slab 3 normal (350 units)          10000 -> 10350         350 u, Rs 950.00 350 u, Rs 950.00 PASS
+zero units                         500 -> 500             0 u, Rs 50.00  0 u, Rs 50.00  PASS
+exactly 100 units                  1000 -> 1100           100 u, Rs 50.00 100 u, Rs 50.00 PASS
+101 units                          1000 -> 1101           101 u, Rs 52.25 101 u, Rs 52.25 PASS
+exactly 200 units                  0 -> 200               200 u, Rs 275.00 200 u, Rs 275.00 PASS
+201 units                          0 -> 201               201 u, Rs 279.50 201 u, Rs 279.50 PASS
+maximum plausible 5000 units       0 -> 5000              5000 u, Rs 21875.00 5000 u, Rs 21875.00 PASS
+roll-over 65535 -> 0 (1 unit)      65535 -> 0             1 u, Rs 50.00  1 u, Rs 50.00  PASS
+roll-over 65400 -> 120             65400 -> 120           256 u, Rs 527.00 256 u, Rs 527.00 PASS
+roll-over 65535 -> 99 (100)        65535 -> 99            100 u, Rs 50.00 100 u, Rs 50.00 PASS
+negative previous reading          -5 -> 100              reject (1)     reject (1)     PASS
+negative current reading           100 -> -1              reject (1)     reject (1)     PASS
+reading above 65535                70000 -> 10            reject (2)     reject (2)     PASS
+current < previous, no roll-over   1530 -> 1200           reject (3)     reject (3)     PASS
+5001 units (above the limit)       0 -> 5001              reject (3)     reject (3)     PASS
+hand-calculated total of 5 bills   0,100,150,200,350      Rs 1487.50                    PASS
+  (actual total printed below)
+  total = Rs 1487.50
+
+0 of 18 checks failed
+(exit status 0)
+
+$ ./billing.out < input_hand5.txt      # 5 bills, total calculated by hand = Rs 1487.50
+Record 1: household 1 [D] previous=0 current=0 units=0 bill=Rs 50.00
+Record 2: household 2 [D] previous=100 current=200 units=100 bill=Rs 50.00
+Record 3: household 3 [D] previous=1000 current=1150 units=150 bill=Rs 162.50
+Record 4: household 4 [D] previous=5000 current=5200 units=200 bill=Rs 275.00
+Record 5: household 5 [D] previous=20000 current=20350 units=350 bill=Rs 950.00
+Summary: 5 bills, 0 rejected, total collected Rs 1487.50
+
+$ ./billing.out < input_all_cases.txt  # normal, boundary, roll-over and invalid input
+Record 1: household 301 [D] previous=100 current=150 units=50 bill=Rs 50.00
+Record 2: household 302 [D] previous=1000 current=1100 units=100 bill=Rs 50.00
+Record 3: household 303 [D] previous=0 current=200 units=200 bill=Rs 275.00
+Record 4: household 304 [D] previous=500 current=500 units=0 bill=Rs 50.00
+Record 5: household 305 [D] previous=65535 current=0 units=1 bill=Rs 50.00
+Record 6: household 306 [D] previous=65400 current=120 units=256 bill=Rs 527.00
+Record 7: household 307 [D] previous=3000 current=3150 units=150 bill=Rs 162.50
+Record 8: household 308 [D] previous=10000 current=10350 units=350 bill=Rs 950.00
+Record 9: REJECTED - not in the form: household category previous current
+Record 10: REJECTED - NEGATIVE READING (household 310, previous=-5, current=100)
+Record 11: REJECTED - IMPLAUSIBLE CONSUMPTION (decrease without a real roll-over, or meter fault) (household 311, previous=1530, current=1200)
+Record 12: REJECTED - READING ABOVE 65535 (household 312, previous=70000, current=10)
+Record 13: REJECTED - category 'X' is not D or C
+Record 14: REJECTED - not in the form: household category previous current
+Record 15: REJECTED - not in the form: household category previous current
+Summary: 8 bills, 7 rejected, total collected Rs 2114.50

@@ -1,0 +1,25 @@
+################ B. ERRORS, CLASSIFIED
+
+--- COMPILE-TIME error
+$ gcc -std=c11 -c compile_error.c
+compile_error.c: In function 'main':
+compile_error.c:7:5: error: expected ',' or ';' before 'printf'
+    7 |     printf("Rs %ld.%02ld\n", paise / 100, paise % 100);
+      |     ^~~~~~
+exit status: 1
+
+--- LINK-TIME error (compilation to .o succeeds, linking fails)
+$ gcc -std=c11 -c link_error.c -o link_error.o
+compile step OK
+$ gcc -std=c11 link_error.o -o link_error.out
+/usr/bin/ld: link_error.o: in function `main':
+link_error.c:(.text+0x12): undefined reference to `compute_bill_total'
+collect2: error: ld returned 1 exit status
+exit status: 1
+
+--- RUN-TIME error (compiles and links, fails while running)
+$ gcc -std=c11 -Wall -Wextra -o runtime_error.out runtime_error.c
+$ ./runtime_error.out
+about to compute the average bill...
+bash: line 1:   754 Floating point exception./runtime_error.out
+exit status: 136  (136 = 128 + signal 8, SIGFPE)
