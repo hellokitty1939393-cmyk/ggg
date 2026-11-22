@@ -237,5 +237,53 @@ All n ≤ 1,000,003: original **67,741,504**, redesign **23,739,568** divisions 
 
 ---
 
+# Additional experiments (one extra program per task)
+
+## Q1 extra – `Task01/q1_more_precedence.c`
+* **Precedence quiz:** 15 expressions predicted by hand before running – 15/15 correct (`2 + 3 * 4 = 14`, `1 + 2 << 3 = 24`, `5 & 3 == 3` = 1 because `==` binds tighter than `&`, `3 > 2 > 1` = 0, nested `?:` groups right-to-left). gcc `-Wparentheses` warns about the unbracketed ones (4 warnings, intentional).
+* **10-bill audit** (buggy expression vs integer-paise billing): wrong on **8 of 10** bills; the two exact matches (bills 1 and 6) are non-senior bills whose GST has no fractional part. Examples: bill 7 (senior, Rs 1500) buggy 1300 vs correct 1288.75 (+11.25); bill 3 buggy 330 vs 330.75 (−0.75 truncation). Net error over the 10 bills: +Rs 46.95. Lesson: the bug is systematic, not rare.
+
+## Q2 extra – `Task02/q2_three_conditions.c`
+Three conditions joined by `||`: A cost 1, P 0.30; B cost 10, P 0.10; C (slow) cost 100, P 0.05; 20,000 passengers, all six orders.
+
+| Order | Cost per passenger |
+|---|---|
+| A,B,C | **70.98** (predicted 71.00 = 1 + 0.7·10 + 0.63·100) |
+| A,C,B | 77.75 |
+| B,A,C | 73.87 |
+| B,C,A | 100.80 |
+| C,A,B | 107.61 |
+| C,B,A | 110.36 (1.6× the best) |
+
+Order by ascending cost / P(true) (3.3, 100, 2000 → A, B, C). Every order grants the same 8037 passengers: for side-effect-free conditions, reordering changes cost, never the answer.
+
+## Q3 extra – `Task03/q3_stress_test.c`
+Verified the four bit functions and the popcount against an array model: every register 0–255 × every device 0–7 × four operations = **8,192 checks, 0 failures** (and other bits untouched); sum of popcounts over 0–255 = 1024 as predicted (8 × 128); **1,000,000 random operations, 0 mismatches**; a predicted sequence involving bit 7 (`10000000 → 10000001 → 00000001 → 00010001 → 00010000 → 10011000`) matched exactly with `unsigned char`.
+
+## Q4 extra – `Task04/q4_scholarship_full.c`
+Twelve students (marks, income): grade, income band, waiver. Marks 101 and −3 are rejected. Nested `if`, `switch`-inside-`if` and the 2-D table produce identical results for all 101 × 3 = 303 (marks, band) cases. Income boundaries are a design decision that must be tested: 249,999 → band 0, 250,000 → band 1, 500,000 → band 1, 500,001 → band 2 (upper edge inclusive in band 1).
+
+## Q5 extra – `Task05/q5_loops_extra.c`
+* **break:** first prime ≥ 1,000,000 = 1000003 (predicted), found after 4 candidates and 1,101 divisions.
+* **continue:** prime counts 25 / 168 / 1229 for ≤ 100 / 1000 / 10000 (as predicted), same with and without skipping evens. **My prediction that skipping evens would roughly halve the divisions was wrong**: the divisions fell only to 79 %, 91 %, 96 %, because `is_prime` already rejects an even number after one division, so `continue` saves just one division per even number.
+* **goto:** leaves both nested loops at once: 1000001 = 101 × 9901 after 4,192,191 inner iterations.
+* **do-while:** digit sum/reversal of 987654 = 39 / 456789 as predicted; input 0 correctly counts 1 digit (a `while (v > 0)` loop would count 0).
+
+## Q6 extra – `Task06/q6_more_loans.c`
+| Loan | P, rate, repay | Hand estimate | Double sim | Paise sim | Total interest (double / paise) |
+|---|---|---|---|---|---|
+| S1 | 50,000, 1.5 %, 3,000 | 20 | 20 | 20 | 7971.75 / 7971.72 |
+| S2 | 5,000, 3 %, 500 | 13 | 13 | 13 | 1033.77 / 1033.77 |
+| S3 | 20,000, 1 %, 1,000 | 23 | 23 | 23 | 2426.96 / 2426.96 |
+| S4 | 100,000, 1 %, 1,000 | never | limit hit | limit hit | repayment = month-1 interest |
+| S5 | 100,000, 1 %, 1,100 | 241 | 241 | 241 | 165,085.21 / 165,085.28 |
+
+Integer paise (rate in basis points, interest rounded half-up each month) agrees with the double version on months and differs by at most 7 paise in total interest – money should be kept in integers. With a loan of 0, `while` reports 0 months but `do-while` reports a phantom installment, so `while` is correct. If the last payment were a full EMI instead of "pay only the balance", Rs 10,000 at 2 % ends at month 6 with Rs 1,354.62 **overpaid**.
+
+## Q7 extra – `Task07/q7_scaling.c`
+Smallest prime ≥ 10^k, k = 1…12 (original / 6k±1 / wheel-30 divisions): 10^3 → 30 / 12 / 11; 10^6 → 999 / 334 / 268; 10^9 → 31,621 / 10,542 / 8,435; 10^12 → 999,999 / 333,334 / 266,668. Ratios settle at **0.333** (6k±1) and **0.267** (wheel-30), as predicted (2/6 and 8/30); the wheel-30 estimate of ~269 for 1,000,003 was 268. Both are worse for tiny n (11: 2 vs 2 vs 3). Validation on all n ≤ 2,000,000: 148,933 primes, 0 mismatches; total divisions 179,492,732 → 62,149,072 (0.346) → 50,726,788 (0.283). Conclusion for the Day-4 defence: the redesigns lower the constant but the work still grows as √n (10^12 needs ~3×10^5 divisions even after redesign); wheel-30 gives ~20 % fewer divisions than 6k±1 at the cost of a step table, so the simpler 6k±1 remains the recommended final design.
+
+---
+
 ## Evidence checklist
 Predictions before execution ✔ (Q1, Q3, Q6, Q7) · operator-by-operator explanation ✔ · observed outputs ✔ (`output_*.png`) · call/division/iteration counts ✔ · tables/graphs ✔ (`*_chart.png`) · complete-the-code TODOs run ✔ · alternative-concept complexity analysis ✔ · design decisions defended ✔.

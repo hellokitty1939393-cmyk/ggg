@@ -5,7 +5,11 @@ progs = [("Task01","q1_precedence.c","q1",""), ("Task02","q2_shortcircuit.c","q2
          ("Task03","q3_register.c","q3",""), ("Task03","q3_inquiry.c","q3i","-O0"),
          ("Task04","q4_grade.c","q4",""), ("Task04","q4_compare.c","q4c",""),
          ("Task05","q5_is_prime.c","q5",""), ("Task05","q5_variants.c","q5v","-O0"),
-         ("Task06","q6_loan.c","q6","-lm"), ("Task07","q7_redesign.c","q7","")]
+         ("Task06","q6_loan.c","q6","-lm"), ("Task07","q7_redesign.c","q7",""),
+         ("Task01","q1_more_precedence.c","q1b",""), ("Task02","q2_three_conditions.c","q2b",""),
+         ("Task03","q3_stress_test.c","q3s",""), ("Task04","q4_scholarship_full.c","q4s",""),
+         ("Task05","q5_loops_extra.c","q5x",""), ("Task06","q6_more_loans.c","q6b","-lm"),
+         ("Task07","q7_scaling.c","q7s","")]
 gcc = subprocess.run("gcc --version | head -1", shell=True, capture_output=True, text=True).stdout.strip()
 out = ["# BUILD_RESULTS", "", "Student: T.R Sangeet | Register number: 1921260245 | Course: CSA02 C Programming | Assignment 2 (CO2)", "",
        f"Compiler: `{gcc}` on {platform.system()} {platform.machine()}", "",
