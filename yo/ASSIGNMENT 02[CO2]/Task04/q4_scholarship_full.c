@@ -1,6 +1,5 @@
 /* Q4 (extra) - Full classifier: marks + family income -> grade + scholarship
- * Student : T.R Sangeet   Reg no : 1921260245
- * Compares THREE structures for the scholarship rule on all 101 x 3 inputs:
+ * * Compares THREE structures for the scholarship rule on all 101 x 3 inputs:
  *   (1) nested if   (2) switch inside if   (3) 2-D lookup table
  * PREDICTION: all three agree on every input (0 differences); invalid marks -> 'X' / reject.
  * Income bands (annual): band 0 < 250000 ; band 1 250000..500000 ; band 2 > 500000

@@ -1,6 +1,6 @@
 # BUILD_RESULTS
 
-Student: T.R Sangeet | Register number: 1921260245 | Course: CSA02 C Programming | Assignment 2 (CO2)
+Course: CSA02 C Programming | Assignment 2 (CO2)
 
 Compiler: `gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0` on Linux x86_64
 

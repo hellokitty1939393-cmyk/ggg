@@ -1,5 +1,5 @@
 /* Q3 Inquiry + Alternative concept (array of 8 bytes vs one byte)
- * Student : T.R Sangeet   Reg no : 1921260245 */
+ * */
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>

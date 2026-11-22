@@ -1,6 +1,5 @@
 /* Q3 - Device-status register with bitwise operators (Complete the Code)
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * PREDICTED register value after each statement in main():
  *   reg = 0                       -> 00000000 (0)
  *   switch_on(reg, LIGHT)         -> 00000001 (1)

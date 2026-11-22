@@ -1,6 +1,5 @@
 /* Q4 - Complete the Code: grade() with switch on marks / 10
- * Student : T.R Sangeet   Reg no : 1921260245
- * Grade rules: 90-100 S, 80-89 A, 70-79 B, 60-69 C, 50-59 D, below 50 F, invalid '?'
+ * * Grade rules: 90-100 S, 80-89 A, 70-79 B, 60-69 C, 50-59 D, below 50 F, invalid '?'
  * Expected: 100:S 95:S 83:A 50:D 49:F -5:?
  */
 #include <stdio.h>

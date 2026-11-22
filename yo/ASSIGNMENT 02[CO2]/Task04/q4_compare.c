@@ -1,6 +1,6 @@
 /* Q4 - else-if ladder vs switch vs lookup table; boundary tests; missing break;
  *      scholarship decision structure.
- * Student : T.R Sangeet   Reg no : 1921260245 */
+ * */
 #include <stdio.h>
 
 static int cmp_count;                      /* comparisons made by the ladder */

@@ -1,6 +1,5 @@
 /* Q5 (extra) - break, continue, goto and do-while in loop design
- * Student : T.R Sangeet   Reg no : 1921260245
- * PREDICTIONS (by hand / known values, before running):
+ * * PREDICTIONS (by hand / known values, before running):
  *   next prime >= 1,000,000          = 1000003
  *   primes <= 100 = 25 ; <= 1000 = 168 ; <= 10000 = 1229
  *   digit sum of 987654              = 39 ; digit reversal = 456789

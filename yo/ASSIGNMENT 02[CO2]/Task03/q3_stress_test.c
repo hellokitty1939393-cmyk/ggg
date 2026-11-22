@@ -1,6 +1,5 @@
 /* Q3 (extra) - Verify the bit-register functions against a reference array model
- * Student : T.R Sangeet   Reg no : 1921260245
- * PREDICTION: 0 mismatches in (a) all 256 registers x 8 devices x 4 operations (8192 checks)
+ * * PREDICTION: 0 mismatches in (a) all 256 registers x 8 devices x 4 operations (8192 checks)
  *             and (b) 1,000,000 random operations; popcount of 0..255 sums to 1024 (8 * 128).
  */
 #include <stdio.h>

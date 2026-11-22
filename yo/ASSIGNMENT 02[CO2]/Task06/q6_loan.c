@@ -1,6 +1,5 @@
 /* Q6 - Loops that must terminate: self-help-group micro-loan schedule
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * Loop choice: while.  A loan of 0 needs zero iterations, and the number of months is
  * not known in advance, so a pre-tested, condition-controlled loop (while) fits.
  * Termination: balance > EPS (half a paisa) -- NOT balance != 0 (floating point).

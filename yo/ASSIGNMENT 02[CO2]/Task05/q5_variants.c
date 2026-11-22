@@ -1,6 +1,5 @@
 /* Q5 - Loop versions, counts, do-while care, overflow, sieve alternative
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * Student-derived condition: if n = a*b with a <= b then a*a <= a*b = n, so the
  * smaller factor is always <= sqrt(n).  Hence loop only while i*i <= n  (no sqrt()).
  */

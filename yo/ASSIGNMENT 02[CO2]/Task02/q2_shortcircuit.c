@@ -1,6 +1,5 @@
 /* Q2 - When does short-circuit evaluation matter? (Railway concession)
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * Concession rule:  (senior AND eligible_class)  OR  disability_card_valid
  * verify_card() is the SLOW server call; every call is counted and logged.
  *

@@ -1,13 +1,11 @@
-# CSA02-1921260245-Assignment2
+# CSA02--Assignment2
 
 | | |
 |---|---|
-| **Student name** | T.R Sangeet |
-| **Register number** | 1921260245 |
-| **Course** | CSA02 – C Programming (Saveetha Institute of Medical and Technical Sciences) |
+| | | **Course** | CSA02 – C Programming (Saveetha Institute of Medical and Technical Sciences) |
 | **Assignment** | Assignment 2 – CO2 (operators, decision-making, looping), 50 marks |
 | **Compiler / version** | GCC 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1), C default standard (gnu17) |
-| **GitHub repository link** | `https://github.com/<your-username>/CSA02-1921260245-Assignment2`  ← fill in after pushing |
+| **GitHub repository link** | `https://github.com/<your-username>/CSA02--Assignment2`  ← fill in after pushing |
 
 ## Compile command (exact)
 

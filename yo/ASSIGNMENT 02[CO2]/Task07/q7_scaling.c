@@ -1,6 +1,5 @@
 /* Q7 (extra) - Scaling study and a second candidate redesign (wheel mod 30)
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * PREDICTIONS (before running):
  *   6k+-1 : tests 2,3 + 2 of every 6 numbers  -> ratio to original -> 2/6 = 0.333 for large primes
  *   wheel30: tests 2,3,5 + the 8 residues {1,7,11,13,17,19,23,29} of every 30 -> 8/30 = 0.267

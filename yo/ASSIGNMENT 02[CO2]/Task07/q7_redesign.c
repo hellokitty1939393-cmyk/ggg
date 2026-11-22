@@ -1,6 +1,5 @@
 /* Q7 - Day-4 Design Challenge: Diagnose, Redesign, Validate  (program chosen: Q5 prime test)
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * ---------------------------------------------------------------------------
  * D. PREDICTIONS (written BEFORE the redesigned program was ever run)
  *   Redesign = test 2 and 3 once, then only divisors of the form 6k-1 and 6k+1.

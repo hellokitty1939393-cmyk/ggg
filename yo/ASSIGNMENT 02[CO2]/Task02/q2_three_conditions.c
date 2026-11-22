@@ -1,6 +1,5 @@
 /* Q2 (extra) - Ordering THREE conditions joined by ||  (cost-aware short-circuit)
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * Conditions (grant concession if ANY is true):
  *   A  senior citizen on a valid class    cost  1   P(true) = 0.30
  *   B  disability card shown at counter   cost 10   P(true) = 0.10

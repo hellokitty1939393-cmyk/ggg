@@ -1,6 +1,5 @@
 /* Q1 (extra) - Precedence quiz with predictions + 10-bill audit, integer-paise billing
- * Student : T.R Sangeet   Reg no : 1921260245
- * Part A predictions were written by hand BEFORE running (expected[] below).
+ * * Part A predictions were written by hand BEFORE running (expected[] below).
  */
 #include <stdio.h>
 

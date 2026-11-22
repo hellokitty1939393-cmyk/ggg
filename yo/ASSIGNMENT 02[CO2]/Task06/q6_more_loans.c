@@ -1,6 +1,5 @@
 /* Q6 (extra) - More loan scenarios, integer-paise version, while vs do-while, balance-sheet check
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * HAND ESTIMATES of months, n = ceil( -ln(1 - r*P/E) / ln(1+r) )   (written before running)
  *   S1  P=50000  r=1.5%  E=3000 : x=0.25    -> 0.2877/0.01489 = 19.3  -> 20 months
  *   S2  P=5000   r=3%    E=500  : x=0.30    -> 0.3567/0.02956 = 12.1  -> 13 months

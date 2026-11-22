@@ -1,6 +1,5 @@
 /* Q1 - Precedence, associativity and the discount bug (Jan Aushadhi billing)
- * Student : T.R Sangeet   Reg no : 1921260245
- *
+ * *
  * PREDICTIONS (written BEFORE running; ints, left-to-right for * and /):
  *   Bill A: price=120 qty=10 senior=1
  *     ((120*10)*15)/100 = 18000/100 = 180 ; *senior -> 180 ; (1200*5)/100 = 60

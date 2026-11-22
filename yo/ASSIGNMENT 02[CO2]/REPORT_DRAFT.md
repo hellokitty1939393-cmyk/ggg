@@ -1,7 +1,7 @@
 # CSA02 C Programming – Assignment 2 (CO2) – Report draft
 
-**Student:** T.R Sangeet  **Register number:** 1921260245  **Compiler:** GCC 13.3.0 (`gcc -Wall -Wextra`)
-**GitHub:** `https://github.com/<your-username>/CSA02-1921260245-Assignment2`
+**Student:**   **Register number:**   **Compiler:** GCC 13.3.0 (`gcc -Wall -Wextra`)
+**GitHub:** `https://github.com/<your-username>/CSA02--Assignment2`
 
 > All figures below are copied from the real runs in `BUILD_RESULTS.md` and the `output_*.png` screenshots.
 > Operation counts (divisions, iterations, calls) are the primary evidence; timings vary between runs.

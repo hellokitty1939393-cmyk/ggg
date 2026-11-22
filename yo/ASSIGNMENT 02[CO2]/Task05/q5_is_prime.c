@@ -1,6 +1,5 @@
 /* Q5 - Complete the Code: trial division using i*i <= n
- * Student : T.R Sangeet   Reg no : 1921260245
- * Expected:
+ * * Expected:
  *       97 prime     divisions = 8
  *      100 not prime divisions = 1
  *     7919 prime     divisions = 87
